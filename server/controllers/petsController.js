@@ -1,0 +1,7 @@
+module.exports.getPets = async (req, res, next) => { 
+    res.status(200).send('Ok');
+};
+module.exports.getPetById = async (req, res, next) => { };
+module.exports.createPets = async (req, res, next) => { };
+module.exports.updatePetById = async (req, res, next) => { };
+module.exports.deletePetById = async (req, res, next) => { };

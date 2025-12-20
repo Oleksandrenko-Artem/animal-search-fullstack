@@ -1,0 +1,1 @@
+module.exports.getPetsTypes = async (req, res, next) => { };
