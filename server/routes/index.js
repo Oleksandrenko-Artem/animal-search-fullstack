@@ -5,6 +5,6 @@ const petsTypesRouter = require('./petsTypesRouter');
 const router = Router();
 
 router.use('/pets', petsRouter);
-router.use('/petsTypes', petsTypesRouter);
+router.use('/petTypes', petsTypesRouter);
 
 module.exports = router;

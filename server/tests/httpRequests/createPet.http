@@ -1,0 +1,12 @@
+POST http://127.0.0.1:5000/api/pets
+Content-Type: application/json
+
+{
+    "name": "Test=",
+    "owner": "Test Testovych",
+    "ownerContacts": "+380123456789",
+    "description": "big, black",
+    "city": "Kyiv",
+    "lostDate": "2024-01-01",
+    "petTypeId": 1
+}

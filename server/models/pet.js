@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Pet extends Model {
     static associate(models) {
-      Pet.belongsTo(models.PetTypes, {
+      Pet.belongsTo(models.PetType, {
         foreignKey: {
           allowNull: false,
           name: 'petTypeId',
