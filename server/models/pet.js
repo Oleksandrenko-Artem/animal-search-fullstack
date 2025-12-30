@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const CONSTANTS = require('../constants');
 module.exports = (sequelize, DataTypes) => {
   class Pet extends Model {
     static associate(models) {
@@ -36,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     city: {
-      type: DataTypes.ENUM('Kyiv', 'Dnipro', 'Zaporizhzhia', 'Odesa', 'New York'),
+      type: DataTypes.ENUM(CONSTANTS.CITIES),
       allowNull: false,
     },
     isFound: {
