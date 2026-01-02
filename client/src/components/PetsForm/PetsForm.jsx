@@ -1,10 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import CONSTANTS from '../../constants';
 
 // TODO VALIDATION
 
-const PetsForm = () => {
+const PetsForm = ({ petTypes }) => {
     const onSubmit = (values, formikBag) => { 
         console.log(values);
         formikBag.resetForm();
@@ -17,7 +18,7 @@ const PetsForm = () => {
             description: '',
             city: CONSTANTS.CITIES[0],
             lostDate: '',
-            petTypeId: CONSTANTS.PET_TYPES[0]
+            petTypeId: petTypes[0]?.id ?? '',
         }} onSubmit={onSubmit}>
             {formikProps => <Form>
                 <label>
@@ -45,15 +46,17 @@ const PetsForm = () => {
                     <Field name="lostDate" type="date" />
                     <ErrorMessage name="lostDate" />
                 </label>
-                <label>
+                {petTypes.length !== 0 && <label>
                     <select name="petTypeId" value={formikProps.values.petTypeId} onChange={formikProps.handleChange}>
-                        {CONSTANTS.PET_TYPES.map((t) => <option key={t.id} value={t.id}>{t.type}</option>)}
+                        {petTypes.map((t) => <option key={t.id} value={t.id}>{t.type}</option>)}
                     </select>
-                </label>
+                </label>}
                 <button type='submit'>Add Pet</button>
             </Form>}
         </Formik>
     );
 }
 
-export default PetsForm;
+const mapStateToProps = ({ pets: { petTypes } }) => ({ petTypes });
+
+export default connect(mapStateToProps) (PetsForm);
