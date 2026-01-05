@@ -1,24 +1,33 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import CONSTANTS from '../../constants';
+import { createPetThunk, getTypesThunk } from '../../store/petsSlice';
 
 // TODO VALIDATION
 
 const PetsForm = ({ petTypes }) => {
-    const onSubmit = (values, formikBag) => { 
-        console.log(values);
+    const dispatch = useDispatch();
+    const onSubmit = (values, formikBag) => {
+    const dataToSend = {
+        ...values,
+        petTypeId: Number(values.petTypeId)
+    };
+        dispatch(createPetThunk(dataToSend));
         formikBag.resetForm();
     };
+    useEffect(() => {
+        dispatch(getTypesThunk());
+    }, [dispatch]);
     return (
-        <Formik initialValues={{
+        <Formik enableReinitialize={true} initialValues={{
             name: '',
             owner: '',
             ownerContacts: '',
             description: '',
             city: CONSTANTS.CITIES[0],
             lostDate: '',
-            petTypeId: petTypes[0]?.id ?? '',
+            petTypeId: petTypes.length > 0 ? petTypes[0].id : '',
         }} onSubmit={onSubmit}>
             {formikProps => <Form>
                 <label>
