@@ -21,7 +21,7 @@ const PetsForm = ({ petTypes }) => {
         dispatch(getTypesThunk());
     }, [dispatch]);
     return (
-        <Formik initialValues={{
+        <Formik enableReinitialize={true} initialValues={{
             name: '',
             owner: '',
             ownerContacts: '',
