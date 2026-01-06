@@ -1,0 +1,12 @@
+.links {
+    display: flex;
+    gap: 10px;
+    li {
+        a {
+            color: white;
+            background: linear-gradient(110deg, rgba(184, 184, 184, 1) 0%, rgba(38, 38, 38, 1) 100%);
+            border-radius: 20px;
+            padding: 10px;
+        }
+    }
+}

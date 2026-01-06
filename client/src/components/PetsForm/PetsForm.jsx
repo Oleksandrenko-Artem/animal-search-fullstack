@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import CONSTANTS from '../../constants';
 import { createPetThunk, getTypesThunk } from '../../store/petsSlice';
+import CONSTANTS from '../../constants';
+import styles from './PetsForm.module.scss';
 
 // TODO VALIDATION
 
@@ -20,7 +21,7 @@ const PetsForm = ({ petTypes }) => {
         dispatch(getTypesThunk());
     }, [dispatch]);
     return (
-        <Formik enableReinitialize={true} initialValues={{
+        <Formik initialValues={{
             name: '',
             owner: '',
             ownerContacts: '',
@@ -29,7 +30,7 @@ const PetsForm = ({ petTypes }) => {
             lostDate: '',
             petTypeId: petTypes.length > 0 ? petTypes[0].id : '',
         }} onSubmit={onSubmit}>
-            {formikProps => <Form>
+            {formikProps => <Form className={styles.form}>
                 <label>
                     <Field name="name" type="text" placeholder="Pet's name" autoFocus />
                     <ErrorMessage name="name" />

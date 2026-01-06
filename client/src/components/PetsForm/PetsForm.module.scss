@@ -1,0 +1,29 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    label {
+        input[type="text"] {
+            width: 400px;
+            height: 30px;
+        }
+        input[type="date"] {
+            width: 403px;
+            height: 32px;
+        }
+        select {
+            width: 408px;
+            height: 36px;
+            text-transform: capitalize;
+        }
+    }
+    button {
+        width: 408px;
+        height: 36px;
+        color: white;
+        background: linear-gradient(110deg, rgba(184, 184, 184, 1) 0%, rgba(38, 38, 38, 1) 100%);
+        border-radius: 20px;
+        border: none;
+    }
+}

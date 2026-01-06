@@ -1,7 +1,12 @@
 const { Pet } = require("../models");
 
 module.exports.getPets = async (req, res, next) => { 
-    res.status(200).send('Ok');
+    try {
+        const foundPets = await Pet.findAll();
+        res.status(200).send({ data: foundPets });
+    } catch (error) {
+        next(error);
+    }
 };
 module.exports.getPetById = async (req, res, next) => { };
 module.exports.createPet = async (req, res, next) => { 

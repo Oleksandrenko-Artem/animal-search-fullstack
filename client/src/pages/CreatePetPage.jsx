@@ -1,9 +1,10 @@
 import React from 'react';
 import PetsForm from '../components/PetsForm/PetsForm';
+import styles from './pages.module.scss';
 
 const CreatePetPage = () => {
     return (
-        <div>
+        <div className={styles.wrapper}>
             <h2>Create Pet</h2>
             <PetsForm />
         </div>

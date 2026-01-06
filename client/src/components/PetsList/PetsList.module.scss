@@ -1,0 +1,15 @@
+.wrapper {
+    h2 {
+        text-align: center;
+    }
+    .pets-list {
+        padding: 0;
+        margin: 5px;
+        border: 2px solid black;
+        li {
+            padding: 10px;
+            margin: 2px;
+            border: 1px solid black;
+        }
+    }
+}
