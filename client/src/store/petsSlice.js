@@ -3,9 +3,9 @@ import { createPet, getPets, getTypes } from "../api";
 import CONSTANTS from './../constants';
 import { pendingCase, rejectedCase } from "./functions";
 
-export const getPetsThunk = createAsyncThunk(`${CONSTANTS.PET_SLICE_NAME}/get/pets`, async (_, thunkAPI) => {
+export const getPetsThunk = createAsyncThunk(`${CONSTANTS.PET_SLICE_NAME}/get/pets`, async (petTypeId, thunkAPI) => {
     try {
-        const response = await getPets();
+        const response = await getPets(petTypeId);
         return response.data.data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error?.message);
@@ -33,6 +33,9 @@ export const createPetThunk = createAsyncThunk(`${CONSTANTS.PET_SLICE_NAME}/crea
 const initialState = {
     pets: [],
     petTypes: [],
+    filter: {
+        petType: '',
+    },
     error: null,
     isFetching: false,
 };
@@ -40,7 +43,11 @@ const initialState = {
 const petsSlice = createSlice({
     name: 'pets',
     initialState,
-    reducers: {},
+    reducers: {
+        changePetTypeFilter: (state, action) => {
+            state.filter.petType = action.payload;
+        },
+    },
     extraReducers: (builder) => { 
         builder.addCase(getTypesThunk.pending, pendingCase);
         builder.addCase(getTypesThunk.fulfilled, (state, action) => {
@@ -66,6 +73,8 @@ const petsSlice = createSlice({
     },
 });
 
-const { reducer } = petsSlice;
+const { reducer, actions } = petsSlice;
+
+export const { changePetTypeFilter } = actions;
 
 export default reducer;

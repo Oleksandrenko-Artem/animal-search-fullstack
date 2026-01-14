@@ -2,6 +2,36 @@
     h2 {
         text-align: center;
     }
+    .filter {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        gap: 10px;
+        padding-left: 20px;
+        label {
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            color: white;
+            background: linear-gradient(110deg, rgba(184, 184, 184, 1) 0%, rgba(38, 38, 38, 1) 100%);
+            border-radius: 20px;
+            border: none;
+            user-select: none;
+            transition: all 0.2s ease;
+            text-transform: capitalize;
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+        .radio {
+            cursor: pointer;
+            margin-right: 8px;
+            accent-color: white;
+            width: 16px;
+            height: 16px;
+        }
+    }
     .pets-list {
         padding: 0;
         margin: 5px;

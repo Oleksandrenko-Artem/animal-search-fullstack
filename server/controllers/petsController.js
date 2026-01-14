@@ -2,7 +2,9 @@ const { Pet } = require("../models");
 
 module.exports.getPets = async (req, res, next) => { 
     try {
-        const foundPets = await Pet.findAll();
+        const { petTypeId } = req.query;
+        const query = petTypeId ? { petTypeId: parseInt(petTypeId) } : {};
+        const foundPets = await Pet.findAll({ where: query });
         res.status(200).send({ data: foundPets });
     } catch (error) {
         next(error);
