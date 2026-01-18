@@ -10,3 +10,4 @@ export const getPets = (petTypeId) => {
     return httpClient.get('/pets');
 };
 export const createPet = (values) => httpClient.post('/pets', values);
+export const deletePet = (id) => httpClient.delete(`/pets/${id}`);

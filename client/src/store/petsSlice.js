@@ -1,7 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { createPet, getPets, getTypes } from "../api";
+import { createPet, deletePet, getPets, getTypes } from "../api";
 import CONSTANTS from './../constants';
 import { pendingCase, rejectedCase } from "./functions";
+
+export const deletePetThunk = createAsyncThunk(`${CONSTANTS.PET_SLICE_NAME}/delete/pet`, async (petId, thunkAPI) => {
+    try {
+        await deletePet(petId);
+        return petId;
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error?.message);
+    }
+});
 
 export const getPetsThunk = createAsyncThunk(`${CONSTANTS.PET_SLICE_NAME}/get/pets`, async (petTypeId, thunkAPI) => {
     try {
@@ -70,6 +79,13 @@ const petsSlice = createSlice({
             state.pets.push(action.payload);
         });
         builder.addCase(createPetThunk.rejected, rejectedCase);
+        builder.addCase(deletePetThunk.pending, pendingCase);
+        builder.addCase(deletePetThunk.fulfilled, (state, action) => {
+            state.isFetching = false;
+            state.error = null;
+            state.pets = state.pets.filter(pet => pet.id !== action.payload);
+        });
+        builder.addCase(deletePetThunk.rejected, rejectedCase);
     },
 });
 

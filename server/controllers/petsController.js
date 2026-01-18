@@ -10,7 +10,6 @@ module.exports.getPets = async (req, res, next) => {
         next(error);
     }
 };
-module.exports.getPetById = async (req, res, next) => { };
 module.exports.createPet = async (req, res, next) => { 
     const { body } = req;
     try {
@@ -20,5 +19,12 @@ module.exports.createPet = async (req, res, next) => {
         next(error);
     }
 };
-module.exports.updatePetById = async (req, res, next) => { };
-module.exports.deletePetById = async (req, res, next) => { };
+module.exports.deletePetById = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        await Pet.destroy({ where: { id } });
+        res.status(200).send({ message: "Pet deleted successfully" });
+    } catch (error) {
+        next(error);
+    }
+ };

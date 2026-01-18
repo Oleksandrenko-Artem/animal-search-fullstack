@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPetsThunk, getTypesThunk, changePetTypeFilter } from '../../store/petsSlice';
+import { getPetsThunk, getTypesThunk, changePetTypeFilter, deletePetThunk } from '../../store/petsSlice';
 import styles from './PetsList.module.scss';
 
 const PetsList = () => {
@@ -50,6 +50,7 @@ const PetsList = () => {
                         <p><b>Owner:</b> {p.owner}, {p.ownerContacts}, {p.city}</p>
                         <p><b>Lost date:</b> {p.lostDate}</p>
                         <p><b>Pet type:</b> {petTypes.find(t => t.id === p.petTypeId).type}</p>
+                        <button onClick={() => dispatch(deletePetThunk(p.id))}>Delete</button>
                     </li>
                 ))}
             </ul>
